@@ -24,6 +24,9 @@ EnvironmentControl/
 │  ├─ EnvironmentAgent.py
 │  ├─ agent.py
 │  └─ tools.py
+├─ assets/
+│  ├─ HARDWARE.md
+│  └─ Circuito.jpg
 └─ README.md
 ```
 
@@ -51,6 +54,10 @@ O projeto usa dois sensores conectados ao ESP32:
 
 - **LM35**: Sensor de temperatura (pino GPIO 34, 10mV/°C)
 - **LDR GL5528**: Sensor de luminosidade (pino GPIO 35, resistência variável)
+
+### Foto do Circuito
+
+![Circuito ESP32 com sensores](assets/Circuito.jpg)
 
 Para pinagem completa, diagrama de divisor de tensão e calibração, veja [assets/HARDWARE.md](assets/HARDWARE.md).
 
@@ -99,3 +106,8 @@ sair
 - Adicionar validação de argumentos das tools
 - Melhorar tratamento de falhas de rede do ESP32
 - Criar testes para `agent.py` e `tools.py`
+
+---
+
+**Repositório**: https://github.com/aslacerda/EnvironmentControl  
+**Desenvolvido para**: Aula 04 - LLM + Pós-graduação em Python para IA
