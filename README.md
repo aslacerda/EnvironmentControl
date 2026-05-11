@@ -6,14 +6,20 @@ Projeto de controle de ambiente com agente de IA e leitura de sensores (ESP32), 
 
 O projeto possui dois blocos principais:
 
-- `python/`: agente conversacional que usa modelo local via endpoint OpenAI-compatible e pode chamar ferramentas.
-- `esp32/`: código embarcado para disponibilizar status de sensores (temperatura/luminosidade) via HTTP.
+- `python/`: agente conversacional que usa modelo local via endpoint OpenAI-compatible e chama ferramenta para consultar o ESP32.
+- `esp32/`: firmware com PlatformIO (Arduino) que publica endpoint HTTP `/status` com temperatura e luminosidade.
 
 ## Estrutura
 
 ```
 EnvironmentControl/
 ├─ esp32/
+│  ├─ include/
+│  │  ├─ secrets.example.h
+│  │  └─ secrets.h (local, não versionado)
+│  ├─ src/
+│  │  └─ main.cpp
+│  └─ platformio.ini
 ├─ python/
 │  ├─ EnvironmentAgent.py
 │  ├─ agent.py
@@ -26,8 +32,38 @@ EnvironmentControl/
 - Python 3.10+
 - Ambiente virtual criado em `.venv`
 - Dependências Python instaladas (ex.: `openai`, `requests`)
+- PlatformIO disponível via `.venv` (`python -m platformio`)
 - Endpoint de modelo ativo em `http://localhost:11434/v1` (ex.: Ollama compatível com API OpenAI)
 - ESP32 acessível na rede (endpoint configurado em `python/tools.py`)
+
+## Configuração do ESP32 (credenciais)
+
+As credenciais de Wi-Fi não devem ir para o GitHub.
+
+1. Copie `esp32/include/secrets.example.h` para `esp32/include/secrets.h`
+2. Preencha SSID e senha no `secrets.h`
+
+O arquivo `secrets.h` está no `.gitignore` e não é versionado.
+
+## ESP32 com PlatformIO
+
+Comandos na raiz do projeto (PowerShell):
+
+```powershell
+# Build
+& ".venv/Scripts/python.exe" -m platformio run --project-dir "esp32"
+
+# Upload
+& ".venv/Scripts/python.exe" -m platformio run --project-dir "esp32" --target upload --upload-port COM4
+
+# Monitor serial
+& ".venv/Scripts/python.exe" -m platformio device monitor --project-dir "esp32" --port COM4 --baud 115200
+```
+
+O firmware expõe:
+
+- `GET /status`: retorna JSON com `temperatura`, `luminosidade`, `rawLuz`, `tensao`, `ldrMin`, `ldrMax`.
+- Logs no serial para cada requisição HTTP (método, IP de origem, resposta e tempo de processamento).
 
 ## Como Executar
 

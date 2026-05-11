@@ -9,3 +9,6 @@ venv/
 
 # VS Code local data
 .vscode/*.log
+
+# ESP32 local secrets
+esp32/include/secrets.h
