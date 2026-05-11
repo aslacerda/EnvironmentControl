@@ -52,7 +52,7 @@ Temperatura (°C) = (leitura_mV / 10)
 
 ## Foto do Circuito
 
-Adicione uma foto do seu protoboard aqui (arquivo: `circuito.jpg`).
+![Circuito ESP32 com LM35 e LDR GL5528](./Circuito.jpg)
 
 ## Calibração
 
