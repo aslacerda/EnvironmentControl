@@ -45,6 +45,15 @@ As credenciais de Wi-Fi não devem ir para o GitHub.
 
 O arquivo `secrets.h` está no `.gitignore` e não é versionado.
 
+## Hardware - Sensores
+
+O projeto usa dois sensores conectados ao ESP32:
+
+- **LM35**: Sensor de temperatura (pino GPIO 34, 10mV/°C)
+- **LDR GL5528**: Sensor de luminosidade (pino GPIO 35, resistência variável)
+
+Para pinagem completa, diagrama de divisor de tensão e calibração, veja [assets/HARDWARE.md](assets/HARDWARE.md).
+
 ## ESP32 com PlatformIO
 
 Comandos na raiz do projeto (PowerShell):
