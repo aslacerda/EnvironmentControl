@@ -10,12 +10,13 @@ ferramentas_agent.registrar(
     descricao='Obtém a temperatura real (LM35) e luminosidade (LDR) da bancada via ESP32.',
     funcao=call_esp32_api
 )
-
+#modelo = 'llama3.2'
+modelo = 'nemotron-3-super:cloud'
 # Inicializa o agente IA
 agent = AIAgent(
     base_url='http://localhost:11434/v1',
     api_key='ollama',
-    modelo='llama3.2'
+    modelo=modelo
 )
 
 # Registra as ferramentas no agente
@@ -24,6 +25,7 @@ agent.registrar_ferramentas(ferramentas_agent.obter_ferramentas())
 # Adiciona as roles (system messages)
 agent.adicionar_role('Chame call_esp32_api APENAS quando o usuário perguntar sobre temperatura, luminosidade ou estado da bancada.')
 agent.adicionar_role('Se a luminosidade estiver baixa, sugira ligar a luz.')
+agent.adicionar_role('Retorne os dados de temperatura e luminosidade.')
 agent.adicionar_role('Se a temperatura estiver alta, avise.')
 
 msg = ''

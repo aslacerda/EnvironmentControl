@@ -37,6 +37,7 @@ class AIAgent:
         """Adiciona uma chamada de ferramenta ao histórico"""
         self.historico_messagens.append({
             'role': 'assistant',
+            'content': '',
             'tool_calls': [{
                 'id': call_id,
                 'type': 'function',
@@ -55,13 +56,16 @@ class AIAgent:
     
     def obter_completion(self):
         """Obtém um completion do modelo"""
-        response = self.client.chat.completions.create(
-            model=self.modelo,
-            messages=self.historico_messagens,
-            stream=True,
-            tools=self.ferramentas if self.ferramentas else None,
-            temperature=0
-        )
+        kwargs = {
+            'model': self.modelo,
+            'messages': self.historico_messagens,
+            'stream': True,
+            'temperature': 0
+        }
+        if self.ferramentas:
+            kwargs['tools'] = self.ferramentas
+        
+        response = self.client.chat.completions.create(**kwargs)
         return response
     
     def processar_streaming(self, response):
