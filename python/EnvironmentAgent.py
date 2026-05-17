@@ -1,6 +1,6 @@
 from agent import AIAgent
-from tools import ToolRegistry, call_esp32_api
-
+from tools import ToolRegistry
+from esp32_api import call_esp32_api
 # Inicializa o registro de ferramentas
 ferramentas_agent = ToolRegistry()
 
@@ -47,7 +47,7 @@ while msg != 'sair':
     response = agent.obter_completion()
     #imprime na tela
     full_response, call_id, func_name, func_args = agent.processar_streaming(response)
-    #se houve uma chamada de ferramente
+    #se houve uma chamada de ferramenta
     if call_id: 
         #adiciona a chamada no histórico
         agent.adicionar_chamada_ferramenta(call_id, func_name, func_args)
