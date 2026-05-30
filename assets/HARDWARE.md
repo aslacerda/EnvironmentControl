@@ -28,7 +28,7 @@ Temperatura (°C) = (leitura_mV / 10)
 - **Resistência no escuro**: ~1MΩ
 - **Resistência com luz intensa**: ~5kΩ
 - **Espectralmente sensível**: 400-700nm (visível)
-- **Montagem**: Divisor de tensão com resistor de pull-down
+- **Montagem**: Divisor de tensão com resistor de pull-down de 10kΩ
 
 ### Configuração (Divisor de Tensão)
 ```
@@ -38,7 +38,7 @@ Temperatura (°C) = (leitura_mV / 10)
   |
   +--- GPIO 35 (ADC)
   |
-  +--- Resistor ~10kΩ (pull-down)
+  +--- Resistor 10kΩ (pull-down)
   |
  GND
 ```
@@ -46,7 +46,7 @@ Temperatura (°C) = (leitura_mV / 10)
 ## Montagem no Protoboard
 
 1. **LM35**: Conectar os 3 pinos (Vin, Vout, GND) - Vout para GPIO 34
-2. **LDR**: Formar divisor de tensão - saída para GPIO 35
+2. **LDR**: Formar divisor de tensão com resistor de 10kΩ para GND - saída para GPIO 35
 3. **Jumpers**: Seguir cores padrão (vermelho=3.3V, preto=GND)
 4. **Capacitores**: Opcional capacitor de 0.1µF entre 3.3V e GND próximo ao ESP32 para estabilidade
 

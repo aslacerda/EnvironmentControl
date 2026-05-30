@@ -54,6 +54,7 @@ O projeto usa dois sensores conectados ao ESP32:
 
 - **LM35**: Sensor de temperatura (pino GPIO 34, 10mV/°C)
 - **LDR GL5528**: Sensor de luminosidade (pino GPIO 35, resistência variável)
+- **Divisor do LDR**: Resistor de **10kΩ** para GND (pull-down), com leitura no GPIO 35
 
 ### Foto do Circuito
 
